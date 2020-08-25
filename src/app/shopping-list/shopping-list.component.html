@@ -1,0 +1,102 @@
+<h1 class="mat-h1">Shopping history</h1>
+
+<form #form="ngForm" [formGroup]="filters" class="mat-elevation-z8">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Search product name"
+      type="text"
+      name="name"
+      formControlName="name"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Search store name"
+      type="text"
+      name="name"
+      formControlName="store"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="beforePicker"
+      placeholder="Purchased before"
+      name="Purchased before"
+      formControlName="purchasedBefore"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="beforePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #beforePicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="afterPicker"
+      placeholder="Purchased after"
+      name="Purchased after"
+      formControlName="purchasedAfter"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="afterPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #afterPicker></mat-datepicker>
+  </mat-form-field>
+  <a
+    (click)="formReset(form)"
+    color="primary"
+    matTooltip="Reset"
+    matTooltipPosition="below"
+    class="form-clear"
+  >
+    <i class="material-icons">
+      remove_circle
+    </i>
+  </a>
+</form>
+
+<mat-progress-spinner
+  *ngIf="showSpinner"
+  class="progress-spinner"
+  [color]="'primary'"
+  [mode]="'indeterminate'"
+  diameter="40"
+>
+</mat-progress-spinner>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td
+      mat-cell
+      *matCellDef="let product"
+      matTooltip="{{ product.description }}"
+      matTooltipPosition="below"
+      color="primary"
+    >
+      {{ product.name }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="store">
+    <th mat-header-cell *matHeaderCellDef>Store</th>
+    <td mat-cell *matCellDef="let product">
+      <a [href]="product.store.url" target="_blank" rel="noopener">
+        {{ product.store.name }}
+      </a>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="purchasedAt">
+    <th mat-header-cell *matHeaderCellDef>Purchased time</th>
+    <td mat-cell *matCellDef="let product">
+      {{ product.purchasedAt | amDateFormat: "LLLL" }}
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<div *ngIf="dataSource.filteredData.length === 0">No data</div>

@@ -1,0 +1,72 @@
+:host {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+
+  .add-icon {
+    margin-bottom: 2px;
+  }
+
+  form {
+    background-color: #fff;
+    padding: 16px;
+  }
+
+  form,
+  .inner-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  mat-form-field {
+    width: 400px;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+  .product-content {
+    margin-bottom: -8px;
+  }
+  .product-card-title {
+    text-transform: capitalize;
+  }
+  .product-card-header {
+    margin-bottom: 20px !important;
+  }
+  .product-card {
+    margin-bottom: 15px;
+    .card-image {
+      max-width: 125px;
+      max-height: 160px;
+      width: auto;
+      height: auto;
+    }
+  }
+  .product-card-actions {
+    margin-bottom: 0 !important;
+  }
+  mat-card {
+    width: calc(100% - 150px);
+  }
+  .card {
+    margin: 20px;
+  }
+  .img {
+    width: 100%;
+    margin-bottom: 18%;
+  }
+  .card-picture {
+    width: 23%;
+    margin-bottom: 2%;
+  }
+  .container {
+    min-height: 100%;
+    width: 100%;
+  }
+  .search-form {
+    width: 90%;
+  }
+}
