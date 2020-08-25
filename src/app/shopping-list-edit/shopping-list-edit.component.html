@@ -1,0 +1,131 @@
+<h1 class="mat-h1">Product list edit</h1>
+
+<form
+  #form="ngForm"
+  [formGroup]="productToAdd"
+  (ngSubmit)="productSave(form)"
+  class="mat-elevation-z8"
+>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Product name"
+      type="text"
+      formControlName="name"
+      name="name"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Description"
+      type="text"
+      formControlName="description"
+      name="description"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Purchased at"
+      formControlName="purchasedAt"
+      name="Purchased at"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="inner-form" formGroupName="store">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Store name"
+        type="text"
+        formControlName="name"
+        name="Store name"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Store url"
+        type="text"
+        formControlName="url"
+        name="Store url"
+      />
+    </mat-form-field>
+  </div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!productToAdd.valid"
+  >
+    <mat-icon class="add-icon">add</mat-icon>
+    Add product
+  </button>
+</form>
+<mat-progress-spinner
+  *ngIf="showSpinner"
+  class="progress-spinner"
+  [color]="'primary'"
+  [mode]="'indeterminate'"
+  diameter="40"
+>
+</mat-progress-spinner>
+
+<mat-card class="card product-card" *ngFor="let product of dataSource.data">
+  <mat-card-header class="product-card-header">
+    <mat-card-title mat-h2 class="product-card-title">
+      {{ product.name }}
+    </mat-card-title>
+    <mat-card-subtitle mat-h3>
+      {{ product.purchasedAt | amDateFormat: "D MMMM YYYY" }}</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content class="product-content">
+    <div
+      fxLayout.gt-sm="row "
+      fxLayout="column"
+      fxLayoutGap="16px"
+      fxLayoutAlign="space-around"
+    >
+      <div fxFlex.gt-sm="50%" fxFlex fxFlex="100" fxLayoutAlign="center">
+        <img
+          mat-card-image
+          class="card-image"
+          src="{{ product.imgUrl }}"
+          alt="Card image"
+        />
+      </div>
+      <div fxFlex.gt-sm="50%" fxFlex>
+        <b>Description:</b><br /><br />
+        {{ product.description }}<br /><br />
+        <a [href]="product.store.url" target="_blank" rel="noopener">
+          {{ product.store.name }}
+        </a>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions
+    class="product-card-actions"
+    layout="row"
+    layout-align="center"
+  >
+    <center>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="removeProduct(product)"
+      >
+        <mat-icon class="remove-icon">restore_from_trash</mat-icon>
+        Remove
+      </button>
+    </center>
+  </mat-card-actions>
+</mat-card>
