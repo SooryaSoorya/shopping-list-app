@@ -1,4 +1,4 @@
-# SlotFun
+# Shopping List App
 [Live Demo](https://sooryasoorya.github.io/shopping-list-app/)
 New ideas/improvements are added in the bottom of this page
 
