@@ -31,6 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Improvements
 
 -Have added spinner when loading products
+
 -Added snack bar messages when add/ remove products
 
 
